@@ -1,0 +1,50 @@
+﻿
+@{
+    ViewBag.Title = "TeacherLogin";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<html>
+
+<head>
+    <title>Teacher Login</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+
+<body>
+    
+    
+    <div class="col-md-12" style="margin-top:20px"></div>
+    <div class="container">
+        <div class="row">
+
+
+            @using (Html.BeginForm("TeacherLogin", "Home", FormMethod.Post))
+            {
+                <div class="col-md-6"> <h1>Öğretmen Girişi</h1>  </div>
+                <div class="col-md-offset-6">
+                    <div class="form-group">
+                        <label>Kullanıcı kodu</label>
+                        <input type="text" name="kullaniciAdi" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label>Şifre</label>
+                        <input type="password" name="sifre" class="form-control" />
+                    </div>
+                    <button class="btn btn-primary">GİRİŞ YAP</button>
+                    <a href="/Home/Index" class="btn btn-success">YÖNETİCİ GİRİŞİ</a>
+                </div>
+            }s
+
+
+        </div>
+    </div>
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+
+</body>
+
+</html>
+

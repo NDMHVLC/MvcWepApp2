@@ -1,0 +1,97 @@
+﻿@using MvcWepApp2.Models;
+@model List<DersProgrami>
+@{
+    ViewBag.Title = "RollCall";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="row">
+    <div class="col-md-6">
+
+        <h3 class="text-center">Ders Proğramınız</h3>
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <td>Sınıf Adı</td>
+                    <td>Ders Adı</td>
+                    <td>Ders Başlangıcı</td>
+                    <td>Ders Bitişi</td>
+                    <td></td>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (DersProgrami _dersProgrami in Model)
+                {
+                    <tr>
+                        <td>@_dersProgrami.SinifAdi</td>
+                        <td>@_dersProgrami.DersAdi</td>
+                        <td>@_dersProgrami.Baslangic.ToString("dd.MM.yyyy HH:mm")</td>
+                        <td>@_dersProgrami.Bitis.ToString("dd.MM.yyyy HH:mm")</td>
+                        <td>
+                            @if (DateTime.Now > _dersProgrami.Baslangic)
+                            {
+                                <a onclick="OgrenciListesiGetir(@_dersProgrami.SinifId, @_dersProgrami.Id)" class="btn btn-sm btn-warning">
+                                    Seç
+                                </a>
+                            }
+                            else
+                            {
+                                <a href="#" class="btn btn-sm btn-warning" disabled>Seç</a>
+                            }
+                        </td>
+                    </tr>
+
+                }
+
+            </tbody>
+        </table>
+
+
+    </div>
+    <div class="col-md-6">
+
+        <h3 class="text-center">Yoklam Listesi</h3>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <td>Öğrenci Id</td>
+                    <td>Öğrenci Adı</td>
+                    <td>Öğrenci Soyadı</td>
+                    <td>Öğrenci No</td>
+                </tr>
+            </thead>
+            <tbody id="tOgrenciListesi">
+                <tr>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    function OgrenciListesiGetir(sinifId) {
+        var result = Ajax('/Dashboard/OgrenciListesiGetir', "{SinifId: " + sinifId + "}", false,'tOgrenciListesi')
+        console.log(result);
+    }
+</script>
+@*<script type="text/javascript">
+        function OgrenciListesiGetir(sinifId) {
+
+            $.ajax({
+                url: '/Dashboard/OgrenciListesiGetir',
+                dataType: 'json',
+                type: 'POST',
+                data: "{SinifId: " + sinifId + "}",
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+
+                },
+                complete: function () {
+
+                }
+            });
+        }
+    </script>*@
+
